@@ -1,0 +1,184 @@
+C51 COMPILER V9.57.0.0   CYLINDER                                                          05/25/2023 17:01:40 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE CYLINDER
+OBJECT MODULE PLACED IN .\Objects\Cylinder.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE Cylinder.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\Keil_v5\C51\Library;
+                    -D:\KeilC51\library) DEBUG OBJECTEXTEND PRINT(.\Listings\Cylinder.lst) TABS(2) OBJECT(.\Objects\Cylinder.obj)
+
+line level    source
+
+   1          #include  "Cylinder.h"
+   2          #include  "AngelADC.h"
+   3          
+   4          
+   5          float kp=0.8;
+   6          float ki=0;
+   7          float kd=2;
+   8          float Angle[8];
+   9          float prverr[8];
+  10          float pid_i[8];
+  11          float pid_d[8];
+  12          float cytime[8];
+  13          unsigned int cytime_counter[8];
+  14          unsigned long int Cy_us=0;//100微秒定时中断的计数
+  15          
+  16          void Cy_Init(void)
+  17          {
+  18   1        unsigned char i;
+  19   1        P2 |= 11111111;
+  20   1        /*P24=1;P26=1;
+  21   1        for(i=0;i<10;i++){delay_ms(100);}
+  22   1        P25=1;P27=1;
+  23   1        for(i=0;i<10;i++){delay_ms(100);}
+  24   1        P21=1;P23=1;
+  25   1        for(i=0;i<10;i++){delay_ms(100);}
+  26   1        P20=1;P22=1;*/
+  27   1        
+  28   1        for(i=0;i<15;i++){delay_ms(100);}
+  29   1        P4=0;
+  30   1        for(i=0;i<15;i++){delay_ms(100);}
+  31   1        P2=0;
+  32   1        for(i=0;i<10;i++){delay_ms(100);Anglefilt();}
+  33   1        
+  34   1        for(i=0;i<8;i++)
+  35   1        {//初始值置0
+  36   2          ang_initial[i]=ang_kf[i];
+  37   2          ang_goal[i]=0;
+  38   2          Angle[i]=0;
+  39   2          pid_i[i]=0;
+  40   2          pid_d[i]=0;
+  41   2          prverr[i]=0;
+  42   2          cytime[i]=0;
+  43   2        }
+  44   1        Anglefilt();
+  45   1        for(i=0;i<10;i++)
+  46   1        {delay_ms(100);}
+  47   1      }
+  48          
+  49          void CyCtrl()
+  50          {//根据角度的气缸控制，PID
+  51   1        unsigned char i;
+  52   1        for(i=0;i<8;i++)
+  53   1        {
+  54   2          Angle[i] = ang_goal[i] - ang_kf[i];
+C51 COMPILER V9.57.0.0   CYLINDER                                                          05/25/2023 17:01:40 PAGE 2   
+
+  55   2          if((Angle[i]>5)||(Angle[i]<-5))
+  56   2          {
+  57   3            pid_i[i] = pid_i[i]+Angle[i];
+  58   3            pid_d[i] = Angle[i]-prverr[i];
+  59   3            prverr[i]=Angle[i];
+  60   3            cytime[i] = kp*Angle[i] + ki*pid_i[i] + kd*pid_d[i];
+  61   3            
+  62   3            if(cytime[i]>0)       {cytime[i]=cytime[i]+6;}
+  63   3            else if(cytime<0)     {cytime[i]=cytime[i]-6;}
+  64   3            if(cytime[i]>500)     {cytime[i]=500;}
+  65   3            else if(cytime[i]<-500){cytime[i]=-500;}
+  66   3          }
+  67   2          else
+  68   2          {cytime[i]=0;}
+  69   2          
+  70   2        }
+  71   1      }
+  72          
+  73          void Cy_Timer_Init()
+  74          {//定时器2用于气缸控制的计时
+  75   1        //100微秒,0.1ms
+  76   1        AUXR |= 0x04;     //定时器时钟1T模式
+  77   1        T2L = 0x48;       //设置定时初始值
+  78   1        T2H = 0xF4;       //设置定时初始值
+  79   1        AUXR |= 0x10;     //定时器2开始计时
+  80   1        IE2 |= 0x04;      //开定时器2中断
+  81   1      }
+  82          
+  83          void Cy_Push(void)
+  84          {
+  85   1        unsigned char i;
+  86   1        Cy_us++;
+  87   1        //if((P2==0x00)&&(P4==0x00)&&(Cy_us>=2000))
+  88   1        if((Cy_us>=10000)||((P2==0x00)&&(P4==0x00)&&(Cy_us>=2000)))
+  89   1        {//开关时长大于1秒，或在100ms内所有时间均计时结束
+  90   2          Cy_us=0;
+  91   2          CyCtrl();
+  92   2        }
+  93   1        //随着该函数运行次数的增加，“目标时间[8]”不断减小
+  94   1        //如果“目标时间[i]”减小到0，则关闭对应的引脚
+  95   1        if(Cy_us<=3)
+  96   1        {//将对应的引脚置为1
+  97   2          for(i=0;i<8;i++)
+  98   2          {
+  99   3            if(cytime[i]>7.0)
+ 100   3            {
+ 101   4              cytime_counter[i]=(unsigned int)(cytime[i]*10.0);
+ 102   4              switch (i)
+ 103   4              {
+ 104   5                case 0: P20=0;P21=1;  break;
+ 105   5                case 1: P22=0;P23=1;  break;
+ 106   5                case 2: P24=0;P25=1;  break;
+ 107   5                case 3: P26=0;P27=1;  break;
+ 108   5                case 4: P40=0;P41=1;  break;
+ 109   5                case 5: P42=0;P43=1;  break;
+ 110   5                case 6: P44=0;P45=1;  break;
+ 111   5                case 7: P46=0;P47=1;  break;
+ 112   5                default:  break;
+ 113   5              }
+ 114   4            }
+ 115   3            else if(cytime[i]<-7.0)
+ 116   3            {
+C51 COMPILER V9.57.0.0   CYLINDER                                                          05/25/2023 17:01:40 PAGE 3   
+
+ 117   4              cytime_counter[i]=(unsigned int)(-cytime[i]*15.0);
+ 118   4              switch (i)
+ 119   4              {
+ 120   5                case 0: P20=1;P21=0;  break;
+ 121   5                case 1: P22=1;P23=0;  break;
+ 122   5                case 2: P24=1;P25=0;  break;
+ 123   5                case 3: P26=1;P27=0;  break;
+ 124   5                case 4: P40=1;P41=0;  break;
+ 125   5                case 5: P42=1;P43=0;  break;
+ 126   5                case 6: P44=1;P45=0;  break;
+ 127   5                case 7: P46=1;P47=0;  break;
+ 128   5                default:  break;
+ 129   5              }
+ 130   4            }       
+ 131   3          }
+ 132   2        }
+ 133   1        else
+ 134   1        {
+ 135   2          for(i=0;i<8;i++)
+ 136   2          {
+ 137   3            if(cytime_counter[i]>0)
+ 138   3            {cytime_counter[i]--;}
+ 139   3            else
+ 140   3            {
+ 141   4              switch (i)
+ 142   4              {
+ 143   5                case 0 :  P20=0;P21=0;  break;
+ 144   5                case 1 :  P22=0;P23=0;  break;
+ 145   5                case 2 :  P24=0;P25=0;  break;
+ 146   5                case 3 :  P26=0;P27=0;  break;
+ 147   5                case 4 :  P40=0;P41=0;  break;
+ 148   5                case 5 :  P42=0;P43=0;  break;
+ 149   5                case 6 :  P44=0;P45=0;  break;
+ 150   5                case 7 :  P46=0;P47=0;  break;
+ 151   5                default:  break;
+ 152   5              }
+ 153   4            }
+ 154   3          }
+ 155   2        }
+ 156   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1881    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    192       3
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

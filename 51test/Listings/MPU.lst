@@ -1,0 +1,235 @@
+C51 COMPILER V9.57.0.0   MPU                                                               03/27/2023 20:43:44 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MPU
+OBJECT MODULE PLACED IN .\Objects\MPU.obj
+COMPILER INVOKED BY: D:\KeilC51\KeilC51\C51\BIN\C51.EXE MPU.c OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\KeilC51\library) DEBUG 
+                    -OBJECTEXTEND PRINT(.\Listings\MPU.lst) TABS(2) OBJECT(.\Objects\MPU.obj)
+
+line level    source
+
+   1          #include "MPU6050.h"
+*** WARNING C318 IN LINE 1 OF MPU.c: can't open file 'MPU6050.h'
+   2          #include "./Software_I2C/Software_I2C.h"
+*** WARNING C318 IN LINE 2 OF MPU.c: can't open file './Software_I2C/Software_I2C.h'
+   3          
+   4          void Delay1ms();    //@11.0592MHz
+   5          void MPU_Delay_Ms(uint16_t Milliseconds)  //移植时需修改
+*** ERROR C141 IN LINE 5 OF MPU.c: syntax error near 'Milliseconds', expected ')'
+   6          {
+   7   1        while(Milliseconds--)
+*** ERROR C202 IN LINE 7 OF MPU.c: 'Milliseconds': undefined identifier
+   8   1          Delay1ms();
+   9   1      }
+  10          
+  11          //IIC连续写
+  12          //reg:要写入的寄存器地址
+  13          //len:要写入的长度
+  14          //buf:要写入的数据的首地址
+  15          //返回值:0,正常
+  16          //    其他,错误代码
+  17          uint8_t MPU_Write_Len(uint8_t reg, uint8_t len, uint8_t *buf)
+*** ERROR C129 IN LINE 17 OF MPU.c: missing ';' before 'MPU_Write_Len'
+  18          {
+  19            return i2c_mem_write(MPU_ADDR, reg, buf, len);
+  20          }
+  21          
+  22          //IIC连续读
+  23          //reg:要读取的寄存器地址
+  24          //len:要读取的长度
+  25          //buf:读取到的数据存储区
+  26          //返回值:0,正常
+  27          //    其他,错误代码
+  28          uint8_t MPU_Read_Len(uint8_t reg, uint8_t len, uint8_t *buf)
+  29          {
+  30            return i2c_mem_read(MPU_ADDR, reg, buf, len);
+  31          }
+  32          
+  33          //IIC写一个字节 
+  34          //reg:寄存器地址
+  35          //Data:数据
+  36          //返回值:0,正常
+  37          //    其他,错误代码
+  38          uint8_t MPU_Write_Byte(uint8_t reg, uint8_t Data)
+  39          {
+  40            return i2c_mem_write(MPU_ADDR, reg, &Data, 1);
+  41          }
+  42          
+  43          //IIC读一个字节 
+  44          //reg:寄存器地址 
+  45          //返回值:读到的数据
+  46          uint8_t MPU_Read_Byte(uint8_t reg)
+  47          {
+  48            uint8_t res;
+  49            i2c_mem_read(MPU_ADDR, reg, &res, 1);
+C51 COMPILER V9.57.0.0   MPU                                                               03/27/2023 20:43:44 PAGE 2   
+
+  50            return res;
+  51          }
+  52          
+  53          //写入8位寄存器的一个位
+  54          uint8_t MPU_Write_Bit(uint8_t addr, uint8_t bitNum, uint8_t Data)
+  55          {
+  56            return i2c_write_bit(MPU_ADDR, addr, bitNum, Data);
+  57          }
+  58          
+  59          //写入8位寄存器的多个位
+  60          uint8_t MPU_Write_Bits(uint8_t addr, uint8_t bitStart, uint8_t length, uint8_t Data)
+  61          {
+  62            return i2c_write_bits(MPU_ADDR, addr, bitStart, length, Data);
+  63          }
+  64          
+  65          //读取一个位从8位器件的寄存器
+  66          uint8_t MPU_Read_Bit(uint8_t addr, uint8_t bitNum, uint8_t *Data)
+  67          {
+  68            return i2c_read_bit(MPU_ADDR, addr, bitNum, Data);
+  69          }
+  70          
+  71          //读取8位寄存器的多个位
+  72          uint8_t MPU_Read_Bits(uint8_t addr, uint8_t bitStart, uint8_t length, uint8_t *Data)
+  73          {
+  74            return i2c_read_bits(MPU_ADDR, addr, bitStart, length, Data);
+  75          }
+  76          
+  77          //   
+  78          //本程序只供学习使用，未经作者许可，不得用于其它任何用途
+  79          //ALIENTEK NANO STM32F103开发板 
+  80          //MPU6050 驱动代码     
+  81          //正点原子@ALIENTEK
+  82          //技术论坛:www.openedv.com
+  83          //创建日期:2018/7/28
+  84          //版本：V1.0
+  85          //版权所有，盗版必究。
+  86          //Copyright(C) 广州市星翼电子科技有限公司 208-2028
+  87          //All rights reserved                   
+  88          // 
+  89          
+  90          //初始化MPU6050
+  91          //返回值:0,成功
+  92          //    其他,错误代码
+  93          uint8_t MPU_Init(void)
+  94          {
+  95            uint8_t res;
+  96            MPU_Write_Byte(MPU_PWR_MGMT1_REG, 0X80);  //复位MPU6050
+  97            MPU_Delay_Ms(100);
+  98            MPU_Write_Byte(MPU_PWR_MGMT1_REG, 0X00);  //唤醒MPU6050 
+  99            MPU_Set_Gyro_Fsr(3);            //陀螺仪传感器,±2000dps
+ 100            MPU_Set_Accel_Fsr(0);           //加速度传感器,±2g
+ 101            MPU_Set_Rate(50);             //设置采样率50Hz
+ 102            MPU_Write_Byte(MPU_INT_EN_REG, 0X01);   //使能数据就绪中断
+ 103            MPU_Write_Byte(MPU_USER_CTRL_REG, 0X00);  //I2C主模式关闭
+ 104            MPU_Write_Byte(MPU_FIFO_EN_REG, 0X00);    //关闭FIFO
+ 105            MPU_Write_Byte(MPU_INTBP_CFG_REG, 0X80);  //INT引脚低电平有效
+ 106            res = MPU_Read_Byte(MPU_DEVICE_ID_REG);
+ 107            if (res == MPU_ADDR)//器件ID正确
+ 108            {
+ 109              MPU_Write_Byte(MPU_PWR_MGMT1_REG, 0X01);  //设置CLKSEL,PLL X轴为参考
+ 110              MPU_Write_Byte(MPU_PWR_MGMT2_REG, 0X00);  //加速度与陀螺仪都工作
+ 111              MPU_Set_Rate(200);              //设置采样率为200Hz
+C51 COMPILER V9.57.0.0   MPU                                                               03/27/2023 20:43:44 PAGE 3   
+
+ 112            }
+ 113            else
+ 114              return 1;
+ 115            return 0;
+ 116          }
+ 117          
+ 118          //设置MPU6050陀螺仪传感器满量程范围
+ 119          //fsr:0,±250dps;1,±500dps;2,±1000dps;3,±2000dps
+ 120          //返回值:0,设置成功
+ 121          //    其他,设置失败 
+ 122          uint8_t MPU_Set_Gyro_Fsr(uint8_t fsr)
+ 123          {
+ 124            return MPU_Write_Byte(MPU_GYRO_CFG_REG, fsr << 3);//设置陀螺仪满量程范围  
+ 125          }
+ 126          
+ 127          //设置MPU6050加速度传感器满量程范围
+ 128          //fsr:0,±2g;1,±4g;2,±8g;3,±16g
+ 129          //返回值:0,设置成功
+ 130          //    其他,设置失败 
+ 131          uint8_t MPU_Set_Accel_Fsr(uint8_t fsr)
+ 132          {
+ 133            return MPU_Write_Byte(MPU_ACCEL_CFG_REG, fsr << 3);//设置加速度传感器满量程范围  
+ 134          }
+ 135          
+ 136          //设置MPU6050的数字低通滤波器
+ 137          //lpf:数字低通滤波频率(Hz)
+ 138          //返回值:0,设置成功
+ 139          //    其他,设置失败 
+ 140          uint8_t MPU_Set_LPF(uint16_t lpf)
+ 141          {
+ 142            uint8_t Data = 0;
+ 143            if (lpf >= 188)Data = 1;
+ 144            else if (lpf >= 98)Data = 2;
+ 145            else if (lpf >= 42)Data = 3;
+ 146            else if (lpf >= 20)Data = 4;
+ 147            else if (lpf >= 10)Data = 5;
+ 148            else Data = 6;
+ 149            return MPU_Write_Byte(MPU_CFG_REG, Data);//设置数字低通滤波器  
+ 150          }
+ 151          
+ 152          //设置MPU6050的采样率(假定Fs=1KHz)
+ 153          //rate:4~1000(Hz)
+ 154          //返回值:0,设置成功
+ 155          //    其他,设置失败 
+ 156          uint8_t MPU_Set_Rate(uint16_t rate)
+ 157          {
+ 158            uint8_t Data;
+ 159            if (rate>1000)rate = 1000;
+ 160            if (rate<4)rate = 4;
+ 161            Data = 1000 / rate - 1;
+ 162            Data = MPU_Write_Byte(MPU_SAMPLE_RATE_REG, Data); //设置数字低通滤波器
+ 163            return MPU_Set_LPF(rate / 2); //自动设置LPF为采样率的一半
+ 164          }
+ 165          
+ 166          //得到温度值
+ 167          //返回值:温度值(扩大了100倍)
+ 168          short MPU_Get_Temperature(void)
+ 169          {
+ 170            uint8_t buf[2];
+ 171            short raw;
+ 172            float temp;
+ 173            MPU_Read_Len(MPU_TEMP_OUTH_REG, 2, buf);
+C51 COMPILER V9.57.0.0   MPU                                                               03/27/2023 20:43:44 PAGE 4   
+
+ 174            raw = ((uint16_t)buf[0] << 8) | buf[1];
+ 175            temp = 36.53 + ((double)raw) / 340;
+ 176            return temp * 100;;
+ 177          }
+ 178          
+ 179          //得到陀螺仪值(原始值)
+ 180          //gx,gy,gz:陀螺仪x,y,z轴的原始读数(带符号)
+ 181          //返回值:0,成功
+ 182          //    其他,错误代码
+ 183          uint8_t MPU_Get_Gyroscope(short *gx, short *gy, short *gz)
+ 184          {
+ 185            uint8_t buf[6], res;
+ 186            res = MPU_Read_Len(MPU_GYRO_XOUTH_REG, 6, buf);
+ 187            if (res == 0)
+ 188            {
+ 189              *gx = ((uint16_t)buf[0] << 8) | buf[1];
+ 190              *gy = ((uint16_t)buf[2] << 8) | buf[3];
+ 191              *gz = ((uint16_t)buf[4] << 8) | buf[5];
+ 192            }
+ 193            return res;;
+ 194          }
+ 195          
+ 196          //得到加速度值(原始值)
+ 197          //gx,gy,gz:陀螺仪x,y,z轴的原始读数(带符号)
+ 198          //返回值:0,成功
+ 199          //    其他,错误代码
+ 200          uint8_t MPU_Get_Accelerometer(short *ax, short *ay, short *az)
+ 201          {
+ 202            uint8_t buf[6], res;
+ 203            res = MPU_Read_Len(MPU_ACCEL_XOUTH_REG, 6, buf);
+ 204            if (res == 0)
+ 205            {
+ 206              *ax = ((uint16_t)buf[0] << 8) | buf[1];
+ 207              *ay = ((uint16_t)buf[2] << 8) | buf[3];
+ 208              *az = ((uint16_t)buf[4] << 8) | buf[5];
+ 209            }
+ 210            return res;;
+ 211          }
+ 212          
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  3 ERROR(S)

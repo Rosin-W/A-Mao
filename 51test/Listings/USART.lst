@@ -1,10 +1,10 @@
-C51 COMPILER V9.57.0.0   USART                                                             03/16/2023 22:56:45 PAGE 1   
+C51 COMPILER V9.57.0.0   USART                                                             04/14/2023 19:33:23 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE USART
 OBJECT MODULE PLACED IN .\Objects\USART.obj
-COMPILER INVOKED BY: D:\KeilC51\KeilC51\C51\BIN\C51.EXE USART.C OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\KeilC51\library) DEBU
-                    -G OBJECTEXTEND PRINT(.\Listings\USART.lst) TABS(2) OBJECT(.\Objects\USART.obj)
+COMPILER INVOKED BY: D:\MDK5\C51\BIN\C51.EXE USART.C LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\MDK5\C51\Library) DEBUG OB
+                    -JECTEXTEND PRINT(.\Listings\USART.lst) TABS(2) OBJECT(.\Objects\USART.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   4              TR1 = 0;
   53   4              AUXR &= ~0x01;    //S1 BRT Use Timer1;
   54   4              TMOD &= ~(1<<6);  //Timer1 set As Timer
-C51 COMPILER V9.57.0.0   USART                                                             03/16/2023 22:56:45 PAGE 2   
+C51 COMPILER V9.57.0.0   USART                                                             04/14/2023 19:33:23 PAGE 2   
 
   55   4              TMOD &= ~0x30;    //Timer1_16bitAutoReload;
   56   4              AUXR |=  (1<<6);  //Timer1 set as 1T mode
@@ -126,7 +126,7 @@ line level    source
  114   3            if(COMx->UART_Mode == UART_9bit_BRTx) S2CON |=  (1<<7); //9bit
  115   3            else                  S2CON &= ~(1<<7); //8bit
  116   3            j = (MAIN_Fosc / 4) / COMx->UART_BaudRate;  //°´1T¼ÆËã
-C51 COMPILER V9.57.0.0   USART                                                             03/16/2023 22:56:45 PAGE 3   
+C51 COMPILER V9.57.0.0   USART                                                             04/14/2023 19:33:23 PAGE 3   
 
  117   3            if(j >= 65536UL)  return 2; //´íÎó
  118   3            j = 65536UL - j;
@@ -157,40 +157,40 @@ line level    source
  143   1      
  144   1        if(COM1.B_TX_busy == 0)   //¿ÕÏÐ
  145   1        {  
- 146   2          COM1.B_TX_busy = 1;   //±êÖ¾Ã¦
- 147   2          TI = 1;         //´¥·¢·¢ËÍÖÐ¶Ï
- 148   2        }
- 149   1      }
- 150          
- 151          void TX2_write2buff(u8 dat) //Ð´Èë·¢ËÍ»º³å£¬Ö¸Õë+1
- 152          {
- 153   1        TX2_Buffer[COM2.TX_write] = dat;  //×°·¢ËÍ»º³å
- 154   1        if(++COM2.TX_write >= COM_TX2_Lenth)  COM2.TX_write = 0;
- 155   1      
- 156   1        if(COM2.B_TX_busy == 0)   //¿ÕÏÐ
- 157   1        {  
+ 146   2          COM1.B_TX_busy = 1;   /.³ê×ºÃ¦
+ 147  "2          TI = 1;         //´¥·¢±¢ËÍÖÐ¶Ë
+ 148   3        }
+ 149"  1      }
+ 150          
+ 151    (  "! void TX2_write2buff¨u8 dau) /?Ð´Èë·¢ËÍ»º³e£¬Ö¸Õë+1
+ 05`         {
+ 153!  1    0   TX2_Buffer[CKM2.DX_write] = dat;  //×°·¢ËÍ»º±å
+ 15t   1        if(++COM2.TZ_wriTe >= COM_TX2_Lenth)  COM2.TX_wrIte = 0;
+ 155   1 (    
+ 156   1`     " if(COM2.B_TX_busy == 0)   //¿ÕÊÐ
+ 1570  1        w  
  158   2          COM2.B_TX_busy = 1;   //±êÖ¾Ã¦
- 159   2          SET_TI2();        //´¥·¢·¢ËÍÖÐ¶Ï
+ 159   2  `       SET_TI2();        //´¥·¢·¢ËÍÖÐ¶Ï
  160   2        }
- 161   1      }
- 162          
+ 161   1     0}
+ 142          
  163          void PrintString1(u8 *puts)
- 164          {
- 165   1          for (; *puts != 0;  puts++)  TX1_write2buff(*puts);   //Óöµ½Í£Ö¹·û0½áÊø
+ 164  "       {
+ 165   1          for(; *puts !=0 $puts++)  TX1_write2âuff8*pu´s):   //Óöµ½Í£Ö¹·û0½áÊø
  166   1      }
  167          
- 168          void PrintString2(u8 *puts)
+ 168          void PrintString2(U8 *puts)
  169          {
- 170   1          for (; *puts != 0;  puts++)  TX2_write2buff(*puts);   //Óöµ½Í£Ö¹·û0½áÊø
- 171   1      }
- 172          
- 173          /*
- 174          void COMx_write2buff(COMx_Define *COMx, u8 dat) //Ð´Èë·¢ËÍ»º³å£¬Ö¸Õë+1
+ 170   1          &or (; *puts != #  puts++)  TX2_wr)te2buff(*puts);   /.Óöµ½Í£Ö¹·û0½áÊø
+0171   1      }
+ 17     (    
+ 173         $/*
+ 174     `    void COLx_wrkte2cufg(COMx_Define *COMx, a8 dat) //Ð´Èë·¢ËÍ»º³å£¬Ö¸Õë+1
  175          {
  176            if(COMx->id == 1) TX1_write2buff(dat);
  177            if(COMx->id == 2) TX2_write2buff(dat);
  178          }
-C51 COMPILER V9.57.0.0   USART                                                             03/16/2023 22:56:45 PAGE 4   
+C51 COMPILER V9.57.0.0   USART                                                             04/14/2023 19:33:23 PAGE 4   
 
  179          
  180          void PrintString(COMx_Define *COMx, u8 *puts)
@@ -254,18 +254,18 @@ line level    source
  238   1      }
  239          
  240          
-C51 COMPILER V9.57.0.0   USART                                                             03/16/2023 22:56:45 PAGE 5   
+C51 COMPILER V9.57.0.0   USART                                                             04/14/2023 19:33:23 PAGE 5   
 
  241          
 *** WARNING C291 IN LINE 134 OF USART.C: not every exit path returns a value
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1049    ----
+   CODE SIZE        =   1262    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =    512    ----
+   XDATA SIZE       =    526       9
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     14       9
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

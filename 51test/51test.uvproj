@@ -13,13 +13,13 @@
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STC15F2K60S2 Series</Device>
+          <Device>STC15W4K32S4 Series</Device>
           <Vendor>STC</Vendor>
-          <Cpu>IRAM(0-0xFF) XRAM(0-0x6FF) IROM(0-0xEFF8) CLOCK(35000000) MODP2</Cpu>
+          <Cpu>IRAM(0-0xFF) XRAM(0-0xEFF) IROM(0-0xEFF8) CLOCK(35000000) MODP2</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>"LIB\STARTUP.A51" ("Standard 8051 Startup Code")</StartupFile>
           <FlashDriverDll></FlashDriverDll>
-          <DeviceId>62472</DeviceId>
+          <DeviceId>62761</DeviceId>
           <RegisterFile>STC15F2K60S2.H</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
@@ -36,7 +36,7 @@
           <BinPath>D:\KeilC51\KeilC51\C51\BIN\</BinPath>
           <IncludePath>D:\KeilC51\KeilC51\C51\INC</IncludePath>
           <LibPath>D:\KeilC51\KeilC51\C51\LIB</LibPath>
-          <RegisterFilePath>.\INC\..\library</RegisterFilePath>
+          <RegisterFilePath>STC\</RegisterFilePath>
           <DBRegisterFilePath>STC\</DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
@@ -125,7 +125,7 @@
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
           <Simulator>
-            <UseSimulator>1</UseSimulator>
+            <UseSimulator>0</UseSimulator>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -137,7 +137,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
-            <UseTarget>0</UseTarget>
+            <UseTarget>1</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>0</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -149,7 +149,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>-1</TargetSelection>
+          <TargetSelection>10</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -163,7 +163,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver></Driver>
+            <Driver>BIN\STCMON51.DLL</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -186,7 +186,7 @@
         </Utilities>
         <Target51>
           <Target51Misc>
-            <MemoryModel>0</MemoryModel>
+            <MemoryModel>2</MemoryModel>
             <RTOS>0</RTOS>
             <RomSize>2</RomSize>
             <DataHold>0</DataHold>
@@ -218,12 +218,14 @@
             <Mx51P>0</Mx51P>
             <hadXRAM2>0</hadXRAM2>
             <uocXram2>0</uocXram2>
+            <hadXRAM3>0</hadXRAM3>
             <ModC2>0</ModC2>
             <ModH2>0</ModH2>
             <Mdu_R515>0</Mdu_R515>
             <Mdu_F120>0</Mdu_F120>
             <Psoc>0</Psoc>
             <hadIROM2>0</hadIROM2>
+            <hadIROM3>0</hadIROM3>
             <ModSmx2>0</ModSmx2>
             <cBanks>0</cBanks>
             <xBanks>0</xBanks>
@@ -281,7 +283,7 @@
               <XRA>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x700</Size>
+                <Size>0xf00</Size>
               </XRA>
               <XRA512>
                 <Type>0</Type>
@@ -293,6 +295,16 @@
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </IROM512>
+              <XRA513>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </XRA513>
+              <IROM513>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </IROM513>
             </OnChipMemories>
           </Target51Misc>
           <C51>
@@ -312,7 +324,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>D:\KeilC51\library</IncludePath>
+              <IncludePath>D:\Keil_v5\C51\Library;D:\KeilC51\library</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -375,9 +387,9 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>oled.c</FileName>
+              <FileName>JY901.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\oled.c</FilePath>
+              <FilePath>.\JY901.c</FilePath>
             </File>
             <File>
               <FileName>ADC.c</FileName>
@@ -385,9 +397,24 @@
               <FilePath>.\ADC.c</FilePath>
             </File>
             <File>
-              <FileName>Soft_UART.c</FileName>
+              <FileName>oled.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Soft_UART.c</FilePath>
+              <FilePath>.\oled.c</FilePath>
+            </File>
+            <File>
+              <FileName>AngelADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AngelADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>Cylinder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Cylinder.c</FilePath>
+            </File>
+            <File>
+              <FileName>SetGoal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SetGoal.c</FilePath>
             </File>
           </Files>
         </Group>

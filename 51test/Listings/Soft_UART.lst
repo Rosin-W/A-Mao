@@ -1,10 +1,10 @@
-C51 COMPILER V9.57.0.0   SOFT_UART                                                         03/20/2023 19:40:14 PAGE 1   
+C51 COMPILER V9.57.0.0   SOFT_UART                                                         04/14/2023 19:48:43 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE SOFT_UART
 OBJECT MODULE PLACED IN .\Objects\Soft_UART.obj
-COMPILER INVOKED BY: D:\KeilC51\KeilC51\C51\BIN\C51.EXE Soft_UART.c OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\KeilC51\library) 
-                    -DEBUG OBJECTEXTEND PRINT(.\Listings\Soft_UART.lst) TABS(2) OBJECT(.\Objects\Soft_UART.obj)
+COMPILER INVOKED BY: D:\MDK5\C51\BIN\C51.EXE Soft_UART.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\MDK5\C51\Library) DEBU
+                    -G OBJECTEXTEND PRINT(.\Listings\Soft_UART.lst) TABS(2) OBJECT(.\Objects\Soft_UART.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52          //========================================================================
   53          void  TxSend(u8 dat)
   54          {
-C51 COMPILER V9.57.0.0   SOFT_UART                                                         03/20/2023 19:40:14 PAGE 2   
+C51 COMPILER V9.57.0.0   SOFT_UART                                                         04/14/2023 19:48:43 PAGE 2   
 
   55   1        u8  i;
   56   1        EA = 0;
@@ -98,7 +98,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     72    ----
+   CODE SIZE        =     73    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

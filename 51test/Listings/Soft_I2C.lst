@@ -1,0 +1,385 @@
+C51 COMPILER V9.57.0.0   SOFT_I2C                                                          03/27/2023 20:59:31 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE SOFT_I2C
+OBJECT MODULE PLACED IN .\Objects\Soft_I2C.obj
+COMPILER INVOKED BY: D:\KeilC51\KeilC51\C51\BIN\C51.EXE Soft_I2C.c OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\KeilC51\library) D
+                    -EBUG OBJECTEXTEND PRINT(.\Listings\Soft_I2C.lst) TABS(2) OBJECT(.\Objects\Soft_I2C.obj)
+
+line level    source
+
+   1          #include "Soft_I2C.h"
+*** WARNING C322 IN LINE 530 OF D:\KeilC51\library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 532 OF D:\KeilC51\library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 534 OF D:\KeilC51\library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 536 OF D:\KeilC51\library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 538 OF D:\KeilC51\library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 540 OF D:\KeilC51\library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 542 OF D:\KeilC51\library\STC15Fxxxx.H: unknown identifier
+   2          
+   3          #define I2C_TIMEOUT_TIMES 100 //超时倍数
+   4          
+   5          //延时 用于等待应答时的超时判断 移植时需修改
+   6          void i2c_timeout_delay(void)  
+   7          {
+   8   1      
+   9   1      }
+  10          
+  11          void i2c_delay()  //每步的间隔 用于等待电平稳定和控制通讯速率
+  12          {
+  13   1      
+  14   1      }
+  15          
+  16          //SCL拉高 移植时需修改
+  17          void I2C_SCL_H(void)
+  18          {
+  19   1        I2C_SCL = 1;
+  20   1      }
+  21          
+  22          //SCL拉低 移植时需修改
+  23          void I2C_SCL_L(void)
+  24          {
+  25   1        I2C_SCL = 0;
+  26   1      }
+  27          
+  28          //SDA拉高 移植时需修改
+  29          void I2C_SDA_H(void)
+  30          {
+  31   1        I2C_SDA = 1;
+  32   1      }
+  33          
+  34          //SDA拉低 移植时需修改
+  35          void I2C_SDA_L(void)
+  36          {
+  37   1        I2C_SDA = 0;
+  38   1      }
+  39          
+  40          //读取SDA 移植时需修改
+  41          uint8_t I2C_SDA_Read(void)
+  42          {
+  43   1        return I2C_SDA;
+  44   1      }
+  45          
+  46          /*******************************************************************************
+  47          * 函 数 名       : i2c_start
+C51 COMPILER V9.57.0.0   SOFT_I2C                                                          03/27/2023 20:59:31 PAGE 2   
+
+  48          * 函数功能     : 产生I2C起始信号
+  49          * 输    入       : 无
+  50          * 输    出       : 无
+  51          *******************************************************************************/
+  52          void i2c_start(void)
+  53          {
+  54   1        I2C_SDA_H();
+  55   1          I2C_SCL_H();
+  56   1          i2c_delay();
+  57   1      
+  58   1          I2C_SDA_L();  //当SCL为高电平时，SDA由高变为低
+  59   1          i2c_delay();
+  60   1          I2C_SCL_L();  //钳住I2C总线，准备发送或接收数据
+  61   1      }
+  62          
+  63          /*******************************************************************************
+  64          * 函 数 名         : i2c_stop
+  65          * 函数功能       : 产生I2C停止信号
+  66          * 输    入         : 无
+  67          * 输    出         : 无
+  68          *******************************************************************************/
+  69          void i2c_stop(void)
+  70          {
+  71   1        I2C_SDA_L();
+  72   1          I2C_SCL_H();
+  73   1          i2c_delay();
+  74   1      
+  75   1          I2C_SDA_H();  //当SCL为高电平时，SDA由低变为高
+  76   1          i2c_delay();
+  77   1      }
+  78          
+  79          /*******************************************************************************
+  80          * 函 数 名         : i2c_ack
+  81          * 函数功能       : 产生ACK应答
+  82          * 输    入         : 无
+  83          * 输    出         : 无
+  84          *******************************************************************************/
+  85          void i2c_ack(void)
+  86          {
+  87   1          I2C_SCL_L();
+  88   1          I2C_SDA_L();  //SDA为低电平
+  89   1          i2c_delay();
+  90   1      
+  91   1          I2C_SCL_H();
+  92   1          i2c_delay();
+  93   1          I2C_SCL_L();
+  94   1        I2C_SDA_H();  
+  95   1      }
+  96          
+  97          /*******************************************************************************
+  98          * 函 数 名         : i2c_nack
+  99          * 函数功能       : 产生NACK非应答
+ 100          * 输    入         : 无
+ 101          * 输    出         : 无
+ 102          *******************************************************************************/
+ 103          void i2c_nack(void)
+ 104          {
+ 105   1          I2C_SCL_L();
+ 106   1          I2C_SDA_H();  //SDA为高电平
+ 107   1          i2c_delay();
+ 108   1      
+ 109   1          I2C_SCL_H();
+C51 COMPILER V9.57.0.0   SOFT_I2C                                                          03/27/2023 20:59:31 PAGE 3   
+
+ 110   1          i2c_delay();
+ 111   1          I2C_SCL_L();
+ 112   1      }
+ 113          
+ 114          /*******************************************************************************
+ 115          * 函 数 名         : i2c_wait_ack
+ 116          * 函数功能       : 等待应答信号到来
+ 117          * 输    入         : 无
+ 118          * 输    出         : 1，接收应答失败
+ 119                         0，接收应答成功
+ 120          *******************************************************************************/
+ 121          uint8_t i2c_wait_ack(void)
+ 122          {
+ 123   1          uint16_t time_temp = 0;
+ 124   1      
+ 125   1          I2C_SCL_H();
+ 126   1          i2c_delay();
+ 127   1          while(I2C_SDA_Read())       //等待SDA为低电平
+ 128   1          {
+ 129   2              time_temp++;
+ 130   2          i2c_timeout_delay();
+ 131   2              if(time_temp > I2C_TIMEOUT_TIMES) //超时则强制结束I2C通信
+ 132   2              {
+ 133   3                  i2c_stop();
+ 134   3                  return 1;
+ 135   3              }
+ 136   2          }
+ 137   1          I2C_SCL_L();
+ 138   1          return 0;
+ 139   1      }
+ 140          
+ 141          /*******************************************************************************
+ 142          * 函 数 名         : i2c_write_byte
+ 143          * 函数功能       : I2C发送一个字节
+ 144          * 输    入         : dat：发送一个字节
+ 145          * 输    出         : 无
+ 146          *******************************************************************************/
+ 147          void i2c_write_byte(uint8_t dat)
+ 148          {
+ 149   1          uint8_t i = 0;
+ 150   1      
+ 151   1          I2C_SCL_L();
+ 152   1          for(i = 0; i<8; i++)  //循环8次将一个字节传出，先传高再传低位
+ 153   1          {
+ 154   2              if((dat & 0x80) > 0)
+ 155   2                  I2C_SDA_H();
+ 156   2              else
+ 157   2                  I2C_SDA_L();
+ 158   2              dat <<= 1;
+ 159   2              i2c_delay();
+ 160   2              I2C_SCL_H();
+ 161   2              i2c_delay();
+ 162   2              I2C_SCL_L();
+ 163   2              i2c_delay();
+ 164   2          }
+ 165   1      }
+ 166          
+ 167          /*******************************************************************************
+ 168          * 函 数 名         : i2c_read_byte
+ 169          * 函数功能       : I2C读一个字节
+ 170          * 输    入         : ack = 1时，发送ACK，ack = 0，发送nACK
+ 171          * 输    出         : 应答或非应答
+C51 COMPILER V9.57.0.0   SOFT_I2C                                                          03/27/2023 20:59:31 PAGE 4   
+
+ 172          *******************************************************************************/
+ 173          uint8_t i2c_read_byte(uint8_t ack)
+ 174          {
+ 175   1          uint8_t i = 0, receive = 0;
+ 176   1      
+ 177   1          for(i = 0; i < 8; i++ ) //循环8次将一个字节读出，先读高再传低位
+ 178   1          {
+ 179   2              I2C_SCL_L();
+ 180   2              i2c_delay();
+ 181   2              I2C_SCL_H();
+ 182   2              receive <<= 1;
+ 183   2              if(I2C_SDA_Read())
+ 184   2            receive++;
+ 185   2              i2c_delay();
+ 186   2          }
+ 187   1          if (!ack)
+ 188   1              i2c_nack();
+ 189   1          else
+ 190   1              i2c_ack();
+ 191   1      
+ 192   1          return receive;
+ 193   1      }
+ 194          
+ 195          /*******************************************************************************
+ 196          * 函 数 名         : i2c_mem_write
+ 197          * 函数功能       : I2C对指定器件、指定寄存器连续写入
+ 198          * 输    入         : 器件地址、器件寄存器地址、待输入数据首地址、待输入数据长度
+ 199          * 输    出         : 0: 成功 1：失败
+ 200          *******************************************************************************/
+ 201          uint8_t i2c_mem_write(uint8_t DevAddress, uint8_t MemAddress, uint8_t *pData, uint16_t Len)
+ 202          {
+ 203   1        i2c_start();
+ 204   1        i2c_write_byte(DevAddress << 1);
+ 205   1        if(i2c_wait_ack())
+ 206   1          return 1;
+ 207   1        i2c_write_byte(MemAddress);
+ 208   1        if(i2c_wait_ack())
+ 209   1          return 1;
+ 210   1        while(Len--)
+ 211   1        {
+ 212   2          i2c_write_byte(*pData++);
+ 213   2          if(i2c_wait_ack())
+ 214   2            return 1;
+ 215   2        }
+ 216   1        i2c_stop();
+ 217   1        return 0;
+ 218   1      }
+ 219          
+ 220          /*******************************************************************************
+ 221          * 函 数 名         : i2c_mem_read
+ 222          * 函数功能       : I2C对指定器件、指定寄存器连续读取
+ 223          * 输    入         : 器件地址、器件寄存器地址、数据缓冲区首地址、数据长度
+ 224          * 输    出         : 0: 成功 1：失败
+ 225          *******************************************************************************/
+ 226          uint8_t i2c_mem_read(uint8_t DevAddress, uint8_t MemAddress, uint8_t *pBuffer, uint16_t Len)
+ 227          {         
+ 228   1          i2c_start();  
+ 229   1        i2c_write_byte(DevAddress << 1);    //发送写命令     
+ 230   1        if(i2c_wait_ack())
+ 231   1          return 1;
+ 232   1          i2c_write_byte(MemAddress);       //发送字地址  
+ 233   1        if(i2c_wait_ack())
+C51 COMPILER V9.57.0.0   SOFT_I2C                                                          03/27/2023 20:59:31 PAGE 5   
+
+ 234   1          return 1;   
+ 235   1        i2c_start();         
+ 236   1        i2c_write_byte(DevAddress << 1 | 1);  //进入接收模式                 
+ 237   1        if(i2c_wait_ack())
+ 238   1          return 1;
+ 239   1        while(Len--)
+ 240   1        {
+ 241   2          *pBuffer++ = i2c_read_byte(Len!=0); //读取字节  
+ 242   2        }
+ 243   1          i2c_stop();               //产生一个停止条件  
+ 244   1        return 0;
+ 245   1      }
+ 246          
+ 247          /**写入8位寄存器的一个位。
+ 248          * @参数 DevAddress  I2C从器件地址
+ 249          * @参数 addr      I2C从器件内部地址
+ 250          * @参数 bitNum    写入的比特位(0-7)
+ 251          * @参数 data      写入数据
+ 252          * @返回值 返回状态 (0=成功)
+ 253          */
+ 254          uint8_t i2c_write_bit(uint8_t DevAddress, uint8_t addr, uint8_t bitNum, uint8_t Data)
+ 255          {
+ 256   1        uint8_t b;
+ 257   1        if (!i2c_mem_read(DevAddress, addr, &b, 1))
+ 258   1        {
+ 259   2          b = (Data != 0) ? (b | (1 << bitNum)) : (b & ~(1 << bitNum));
+ 260   2          return i2c_mem_write(DevAddress, addr, &b, 1);  //写入数据
+ 261   2        }
+ 262   1        else
+ 263   1          return 1;
+ 264   1      }
+ 265          
+ 266          /**写入8位寄存器的多个位。
+ 267          * @参数 DevAddress  I2C从器件地址
+ 268          * @参数 addr     I2C从器件内部地址
+ 269          * @参数 bitStart 第一位的写入位置（0-7）
+ 270          * @参数 length   写的比特数(不超过8)
+ 271          * @参数 Data     写入数据
+ 272          * @返回值 返回状态 (0=成功)
+ 273          */
+ 274          uint8_t i2c_write_bits(uint8_t DevAddress, uint8_t addr, uint8_t bitStart, uint8_t length, uint8_t Data)
+ 275          {
+ 276   1        //      010 要写入的值
+ 277   1        // 76543210 比特位
+ 278   1        //    xxx   args: bitStart=4, length=3
+ 279   1        // 00011100 掩码字节
+ 280   1        // 10101111 原始值（样本）
+ 281   1        // 10100011 原始值 & ~掩码
+ 282   1        // 10101011 掩码 | 原始值
+ 283   1        uint8_t b, mask = 0;
+ 284   1        if (!i2c_mem_read(DevAddress, addr, &b, 1))
+ 285   1        {
+ 286   2          mask = (((1 << length) - 1) << (bitStart - length + 1));  //掩码
+ 287   2          Data <<= (bitStart - length + 1); //把写入的数据移动到位
+ 288   2          Data &= mask;
+ 289   2          b &= ~(mask);
+ 290   2          b |= Data;
+ 291   2      
+ 292   2          return i2c_mem_write(DevAddress, addr, &b, 1);  //写入数据
+ 293   2        }
+ 294   1        else
+ 295   1          return 1;
+C51 COMPILER V9.57.0.0   SOFT_I2C                                                          03/27/2023 20:59:31 PAGE 6   
+
+ 296   1      }
+ 297          /**读取一个位从8位器件的寄存器。
+ 298          * @参数 DevAddress  I2C从器件地址
+ 299          * @参数 addr    I2C从器件内部地址
+ 300          * @参数 bitNum  位的位置来读取（0-7）
+ 301          * @参数 *data   数据存储地址
+ 302          * @返回值（0=成功）
+ 303          */
+ 304          uint8_t i2c_read_bit(uint8_t DevAddress, uint8_t addr, uint8_t bitNum, uint8_t *Data)
+ 305          {
+ 306   1        uint8_t b;
+ 307   1        if (!i2c_mem_read(DevAddress, addr, &b, 1))
+ 308   1        {
+ 309   2          *Data = b & (1 << bitNum);
+ 310   2          return 0;
+ 311   2        }
+ 312   1        else
+ 313   1        {
+ 314   2          return 1;
+ 315   2        }
+ 316   1      }
+ 317          /**读取8位寄存器的多个位。
+ 318          * @参数 DevAddress  I2C从器件地址
+ 319          * @参数 addr    I2C从器件内部地址
+ 320          * @参数 bitStart第一位的位置读取（0-7）
+ 321          * @参数 length  位读取@参数长度数（不超过8）
+ 322          * @参数 *data   数据存储地址（即'101'任何bitStart位置读取将等于0X05）
+ 323          * @返回值（0=成功）
+ 324          */
+ 325          uint8_t i2c_read_bits(uint8_t DevAddress, uint8_t addr, uint8_t bitStart, uint8_t length, uint8_t *Data)
+ 326          {
+ 327   1        // 01101001 读取字节
+ 328   1        // 76543210 比特位
+ 329   1        //    xxx   args: bitStart=4, length=3
+ 330   1        //    010   masked
+ 331   1        //   -> 010 shifted
+ 332   1        uint8_t b, mask = 0;
+ 333   1        if (!i2c_mem_read(DevAddress, addr, &b, 1))
+ 334   1        {
+ 335   2      
+ 336   2          mask = ((1 << length) - 1) << (bitStart - length + 1);
+ 337   2          b &= mask;
+ 338   2          b >>= (bitStart - length + 1);
+ 339   2          *Data = b;
+ 340   2          return 0;
+ 341   2        }
+ 342   1        else
+ 343   1          return 1;
+ 344   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    761    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      42
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  7 WARNING(S),  0 ERROR(S)

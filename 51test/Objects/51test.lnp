@@ -1,7 +1,10 @@
 ".\Objects\STARTUP.obj",
 ".\Objects\main.obj",
-".\Objects\oled.obj",
+".\Objects\JY901.obj",
 ".\Objects\ADC.obj",
-".\Objects\Soft_UART.obj" 
+".\Objects\oled.obj",
+".\Objects\AngelADC.obj",
+".\Objects\Cylinder.obj",
+".\Objects\SetGoal.obj" 
 TO ".\Objects\51test" 
 PRINT(".\Listings\51test.m51") RAMSIZE(256) 

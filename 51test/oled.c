@@ -12,29 +12,10 @@
 //[6]0 1 2 3 ... 127	
 //[7]0 1 2 3 ... 127 			  
 
-
-/***********************Delay****************************************/
-void Delay_50ms(unsigned int Del_50ms)
-{
-	unsigned int m;
-	for(;Del_50ms>0;Del_50ms--)
-		for(m=6245;m>0;m--);
-}
-
-void Delay_1ms(unsigned int Del_1ms)
-{
-	unsigned char j;
-	while(Del_1ms--)
-	{	
-		for(j=0;j<123;j++);
-	}
-}
-
-
 /**********************************************
 //IIC Start
 **********************************************/
-void IIC_Start()
+void OLED_IIC_Start()
 {
 	OLED_SCLK_Set() ;
 	OLED_SDIN_Set();
@@ -45,7 +26,7 @@ void IIC_Start()
 /**********************************************
 //IIC Stop
 **********************************************/
-void IIC_Stop()
+void OLED_IIC_Stop()
 {
 	OLED_SCLK_Set() ;
 	OLED_SDIN_Clr();
@@ -86,28 +67,28 @@ void Write_IIC_Byte(unsigned char IIC_Byte)
 **********************************************/
 void Write_IIC_Command(unsigned char IIC_Command)
 {
-   IIC_Start();
+   OLED_IIC_Start();
    Write_IIC_Byte(0x78);            //Slave address,SA0=0
 	IIC_Wait_Ack();	
    Write_IIC_Byte(0x00);			//write command
 	IIC_Wait_Ack();	
    Write_IIC_Byte(IIC_Command); 
 	IIC_Wait_Ack();	
-   IIC_Stop();
+   OLED_IIC_Stop();
 }
 /**********************************************
 // IIC Write Data
 **********************************************/
 void Write_IIC_Data(unsigned char IIC_Data)
 {
-   IIC_Start();
+   OLED_IIC_Start();
    Write_IIC_Byte(0x78);			//D/C#=0; R/W#=0
 	 IIC_Wait_Ack();	
    Write_IIC_Byte(0x40);			//write data
 	 IIC_Wait_Ack();	
    Write_IIC_Byte(IIC_Data);
 	 IIC_Wait_Ack();	
-   IIC_Stop();
+   OLED_IIC_Stop();
 }
 void OLED_WR_Byte(unsigned dat,unsigned cmd)
 {
@@ -124,7 +105,7 @@ void OLED_WR_Byte(unsigned dat,unsigned cmd)
 /********************************************
 // fill_Picture
 ********************************************/
-void fill_picture(unsigned char fill_Data)
+/*void fill_picture(unsigned char fill_Data)
 {
 	unsigned char m,n;
 	for(m=0;m<8;m++)
@@ -137,7 +118,7 @@ void fill_picture(unsigned char fill_Data)
 				OLED_WR_Byte(fill_Data,1);
 			}
 	}
-}
+}*/
 
 
 //坐标设置
@@ -148,7 +129,7 @@ void OLED_Set_Pos(unsigned char x, unsigned char y)
 } 
 
 //开启OLED显示    
-void OLED_Display_On(void)
+/*void OLED_Display_On(void)
 {
 	OLED_WR_Byte(0X8D,OLED_CMD);  //SET DCDC命令
 	OLED_WR_Byte(0X14,OLED_CMD);  //DCDC ON
@@ -161,7 +142,7 @@ void OLED_Display_Off(void)
 	OLED_WR_Byte(0X8D,OLED_CMD);  //SET DCDC命令
 	OLED_WR_Byte(0X10,OLED_CMD);  //DCDC OFF
 	OLED_WR_Byte(0XAE,OLED_CMD);  //DISPLAY OFF
-}
+}*/
 
 //清屏函数,清完屏,整个屏幕是黑色的!和没点亮一样!!!	  
 void OLED_Clear(void)  
@@ -176,7 +157,7 @@ void OLED_Clear(void)
 	} //更新显示
 }
 
-void OLED_On(void)  
+/*void OLED_On(void)  
 {  
 	u8 i,n;		    
 	for(i=0;i<8;i++)  
@@ -186,7 +167,7 @@ void OLED_On(void)
 		OLED_WR_Byte (0x10,OLED_CMD);      //设置显示位置—列高地址   
 		for(n=0;n<128;n++)OLED_WR_Byte(1,OLED_DATA); 
 	} //更新显示
-}
+}*/
 
 //在指定位置显示一个字符,包括部分字符
 //x:0~127
@@ -211,7 +192,6 @@ void OLED_ShowChar(u8 x,u8 y,u8 chr,u8 Char_Size)
 				OLED_Set_Pos(x,y);
 				for(i=0;i<6;i++)
 				OLED_WR_Byte(F6x8[c][i],OLED_DATA);
-				
 			}
 }
 //显示一个字符号串
@@ -233,7 +213,7 @@ u32 oled_pow(u8 m,u8 n)
 	return result;
 }			
 
-//显示2个数字
+//显示数字
 //x,y :起点坐标	 
 //len :数字的位数
 //size:字体大小
@@ -257,13 +237,22 @@ void OLED_num(u8 x,u8 y,u32 num,u8 len,u8 size2)
 		}
 	 	OLED_ShowChar(x+(size2/2)*t,y,temp+'0',size2); 
 	}
-} 
-//浮点型带三位小数
+}
+//浮点型正负带两位小数
 void OLED_numf(u8 x,u8 y,float num,u8 len,u8 size2)
 {         	
 	u32 num1,num2;
 	u8 t,temp;
 	u8 enshow=0;
+	if(num<0)
+	{
+		OLED_ShowChar(x,y,'-',size2);
+		num = -num;
+	}
+	else
+	{
+		OLED_ShowChar(x,y,' ',size2);
+	}
 	num1=num;
 	num2=num*(1000)-num1*(1000);
 	for(t=0;t<len;t++)
@@ -273,23 +262,23 @@ void OLED_numf(u8 x,u8 y,float num,u8 len,u8 size2)
 		{
 			if(temp==0)
 			{
-				OLED_ShowChar(x+(size2/2)*t,y,' ',size2);
+				OLED_ShowChar(x+(size2/2)*(t+1),y,' ',size2);
 				continue;
 			}else enshow=1; 
 		 	 
 		}
-	 	OLED_ShowChar(x+(size2/2)*t,y,temp+'0',size2); 
+	 	OLED_ShowChar(x+(size2/2)*(t+1),y,temp+'0',size2); 
 	}
-	for(t=0;t<3;t++)
+	for(t=0;t<2;t++)
 	{
 		temp=(num2/oled_pow(10,3-t-1))%10;
-	 	OLED_ShowChar(x+(size2/2)*(len+1)+(size2/2)*t,y,temp+'0',size2); 
+	 	OLED_ShowChar(x+(size2/2)*(len+2)+(size2/2)*t,y,temp+'0',size2); 
 	}
-	OLED_ShowChar(x+(size2/2)*len,y,'.',size2);
+	OLED_ShowChar(x+(size2/2)*(len+1),y,'.',size2);
 } 
 
 //显示汉字
-void OLED_ShowCHinese(u8 x,u8 y,u8 no)
+/*void OLED_ShowCHinese(u8 x,u8 y,u8 no)
 {      			    
 	u8 t,adder=0;
 	OLED_Set_Pos(x,y);	
@@ -304,10 +293,10 @@ void OLED_ShowCHinese(u8 x,u8 y,u8 no)
 				OLED_WR_Byte(Hzk[2*no+1][t],OLED_DATA);
 				adder+=1;
       }					
-}
+}*/
 
 /***********功能描述：显示显示BMP图片128×64起始点坐标(x,y),x的范围0～127，y为页的范围0～7*****************/
-void OLED_DrawBMP(unsigned char x0, unsigned char y0,unsigned char x1, unsigned char y1,unsigned char BMP[])
+/*void OLED_DrawBMP(unsigned char x0, unsigned char y0,unsigned char x1, unsigned char y1,unsigned char BMP[])
 { 	
  unsigned int j=0;
  unsigned char x,y;
@@ -322,7 +311,7 @@ void OLED_DrawBMP(unsigned char x0, unsigned char y0,unsigned char x1, unsigned 
 	    	OLED_WR_Byte(BMP[j++],OLED_DATA);	    	
 	    }
 	}
-} 
+} */
 
 //初始化SSD1306					    
 void OLED_Init(void)
@@ -363,32 +352,3 @@ void OLED_Init(void)
 	
 	OLED_WR_Byte(0xAF,OLED_CMD);//--turn on oled panel
 }  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

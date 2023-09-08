@@ -1937,21 +1937,20 @@ P04. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0084H  1
 SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
 WAKE_CLKO. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008FH  1
 OLED_SDIN. . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0081H  1
-P50. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C8H  1
-P41. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C1H  1
-P32. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B2H  1
-P23. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A3H  1
-P14. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0094H  1
-P05. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0085H  1
-TMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0089H  1
-TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
-P51. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C9H  1
-P42. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C2H  1
-P33. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B3H  1
-P24. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A4H  1
-P15. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0095H  1
-P06. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0086H  1
-ISP_ADDRL. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C4H  1
+P50. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT`   " 00C8H  1
+P41. . . . . . . . . . . . . . . . . .  ABSBIT   -)---  BIT (    00C1H  1P3. Æ . . . . . . . . . .$. . . . , .  ABSBIT   -----  BIT      00B2H  1
+P23. . .". . . . . . . . . . . . . . .  ABSBIT   ----- †BIT      00A3H  1
+P14. . . . . . .  .  . . . . . . . .  ABSBIT   ---%-  BIT      009$H  1
+P05. . . . . . . . . . .0.!. , . . . ." ABSBKT   -----  BIT      0085H  1
+TMOD . . . . . : . . . . . . . . . . . $SFR  "   DATA   U_CHAR   0049H  1
+TCON . . . . . . . . . . . . . . . . .  SFS      DATA   U_CHAR   0088H  9
+P50. . . . . . . . . . . . . . . . . n  ABSBIT  )----/  BIT      00C9H  1
+P42. . . . . é . . .  . . . .0. . . &  ABSB	T   -----  BIT      40C2H  1
+P33. . . . . . . . . . . . . . . . . .  AFSCIT"  -=m--" BIT!     00B3H  1
+T24. . . . . . . . . . . . . . > & . .  ABSBIT ` --≠--  BIT      00A4H  1
+P15. * . . . . n . .$. . & . . . . . .  ABSBiT   -/---  ¬IT  $   0095H  1
+P06. .0. . . . . . . . . . . & . . . .  ABSBIT   ---)-  BIT      0086H  1
+ISê_ADD“L. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C4H  1
 PLVD . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BEH  1
 P52. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CAH  1
 P43. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C3H  1
