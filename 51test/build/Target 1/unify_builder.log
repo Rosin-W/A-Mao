@@ -1,0 +1,64 @@
+[2023-03-15 19:31:14]	link failed !, exit code: 3
+   at unify_builder.Program.Main(String[] args_)
+---
+
+LX51 LINKER/LOCATER V4.66.87.0 - SN: T1DMC-WIPVGC
+COPYRIGHT ARM Germany GmbH 1995 - 2017
+"@e:\毕业设计\项目\控制部分\51test\build\Target 1\51test.lnp" ".\build\Target 1\ADC.o",".\build\Target 1\STARTUP.o",".\build\Target 1\Soft_UART.o",".\build\Target 1\main.o",".\build\Target 1\oled.o" TO ".\build\Target 1\51test"
+PRINT(".\build\Target 1\51test.map") REMOVEUNUSED
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 1129H BYTE (214%) *
+******************************************************************************
+
+Program Size: data=50.0 xdata=0 const=2200 code=2662
+*** ERROR L257: UNKNOWN
+
+
+[2023-03-15 19:32:20]	link failed !, exit code: 3
+   at unify_builder.Program.Main(String[] args_)
+---
+
+LX51 LINKER/LOCATER V4.66.87.0 - SN: T1DMC-WIPVGC
+COPYRIGHT ARM Germany GmbH 1995 - 2017
+"@e:\毕业设计\项目\控制部分\51test\build\Target 1\51test.lnp" ".\build\Target 1\ADC.o",".\build\Target 1\STARTUP.o",".\build\Target 1\Soft_UART.o",".\build\Target 1\main.o",".\build\Target 1\oled.o" TO ".\build\Target 1\51test"
+PRINT(".\build\Target 1\51test.map") REMOVEUNUSED
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 1129H BYTE (214%) *
+******************************************************************************
+
+Program Size: data=50.0 xdata=0 const=2200 code=2662
+*** ERROR L257: UNKNOWN
+
+
+[2023-03-15 20:38:35]	link failed !, exit code: 3
+   at unify_builder.Program.Main(String[] args_)
+---
+
+LX51 LINKER/LOCATER V4.66.87.0 - SN: T1DMC-WIPVGC
+COPYRIGHT ARM Germany GmbH 1995 - 2017
+"@e:\毕业设计\项目\控制部分\51test\build\Target 1\51test.lnp" ".\build\Target 1\ADC.o",".\build\Target 1\STARTUP.o",".\build\Target 1\Soft_UART.o",".\build\Target 1\main.o",".\build\Target 1\oled.o" TO ".\build\Target 1\51test"
+PRINT(".\build\Target 1\51test.map") REMOVEUNUSED
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 1129H BYTE (214%) *
+******************************************************************************
+
+Program Size: data=50.0 xdata=0 const=2200 code=2662
+*** ERROR L257: UNKNOWN
+
+
+[2023-03-15 20:39:00]	link failed !, exit code: 3
+   at unify_builder.Program.Main(String[] args_)
+---
+
+LX51 LINKER/LOCATER V4.66.87.0 - SN: T1DMC-WIPVGC
+COPYRIGHT ARM Germany GmbH 1995 - 2017
+"@e:\毕业设计\项目\控制部分\51test\build\Target 1\51test.lnp" ".\build\Target 1\ADC.o",".\build\Target 1\STARTUP.o",".\build\Target 1\Soft_UART.o",".\build\Target 1\main.o",".\build\Target 1\oled.o" TO ".\build\Target 1\51test"
+PRINT(".\build\Target 1\51test.map") REMOVEUNUSED
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 1129H BYTE (214%) *
+******************************************************************************
+
+Program Size: data=50.0 xdata=0 const=2200 code=2662
+*** ERROR L257: UNKNOWN
+
+

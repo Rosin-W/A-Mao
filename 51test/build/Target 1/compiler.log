@@ -1,0 +1,38 @@
+>>> cc
+
+C51 COMPILER V9.57.0.0 - SN: T1DMC-WIPVGC
+COPYRIGHT Copyright (C) 2012 - 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C322 IN LINE 530 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 532 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 534 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 536 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 538 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 540 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 542 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+
+C51 COMPILATION COMPLETE.  7 WARNING(S),  0 ERROR(S)
+C51 COMPILER V9.57.0.0 - SN: T1DMC-WIPVGC
+COPYRIGHT Copyright (C) 2012 - 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C322 IN LINE 530 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 532 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 534 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 536 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 538 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 540 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+*** WARNING C322 IN LINE 542 OF D:/KeilC51/library\STC15Fxxxx.H: unknown identifier
+
+C51 COMPILATION COMPLETE.  7 WARNING(S),  0 ERROR(S)
+
+>>> ld
+
+
+LX51 LINKER/LOCATER V4.66.87.0 - SN: T1DMC-WIPVGC
+COPYRIGHT ARM Germany GmbH 1995 - 2017
+"@e:\毕业设计\项目\控制部分\51test\build\Target 1\51test.lnp" ".\build\Target 1\ADC.o",".\build\Target 1\STARTUP.o",".\build\Target 1\Soft_UART.o",".\build\Target 1\main.o",".\build\Target 1\oled.o" TO ".\build\Target 1\51test"
+PRINT(".\build\Target 1\51test.map") REMOVEUNUSED
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 1129H BYTE (214%) *
+******************************************************************************
+
+Program Size: data=50.0 xdata=0 const=2200 code=2662
+*** ERROR L257: UNKNOWN

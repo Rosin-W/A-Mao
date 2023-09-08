@@ -1,0 +1,7 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\oled.obj",
+".\Objects\ADC.obj",
+".\Objects\Soft_UART.obj" 
+TO ".\Objects\51test" 
+PRINT(".\Listings\51test.m51") RAMSIZE(256) 

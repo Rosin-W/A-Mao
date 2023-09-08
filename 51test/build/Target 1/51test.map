@@ -1,0 +1,534 @@
+LX51 LINKER/LOCATER V4.66.87.0                                                          03/15/2023  20:39:00  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.87.0, INVOKED BY:
+D:\KEILC51\KEILC51\C51\BIN\LX51.EXE .\build\Target 1\ADC.o, .\build\Target 1\STARTUP.o, .\build\Target 1\Soft_UART.o, .\
+>> build\Target 1\main.o, .\build\Target 1\oled.o TO .\build\Target 1\51test PRINT (.\build\Target 1\51test.map) REMOVEU
+>> NUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\ADC.o (ADC)
+         COMMENT TYPE 0: C51 V9.57.0.0
+  .\build\Target 1\STARTUP.o (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  .\build\Target 1\Soft_UART.o (SOFT_UART)
+         COMMENT TYPE 0: C51 V9.57.0.0
+  .\build\Target 1\main.o (MAIN)
+         COMMENT TYPE 0: C51 V9.57.0.0
+  .\build\Target 1\oled.o (OLED)
+         COMMENT TYPE 0: C51 V9.57.0.0
+  D:\KEILC51\KEILC51\C51\LIB\C51FPS.LIB (?C?FPADD)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51FPS.LIB (?C?FPMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51FPS.LIB (?C?FPDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51FPS.LIB (?C?FCAST)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51FPS.LIB (?C?CASTF)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51S.LIB (?C?CLDPTR)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51S.LIB (?C?CLDOPTR)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51S.LIB (?C?IMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51S.LIB (?C?UIDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEILC51\KEILC51\C51\LIB\C51S.LIB (?C?LNEG)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\51test (ADC)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   000A66H   CODE
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+I:000000H   I:000000H   I:00007FH   000031H   DATA
+C:000000H   C:000000H   C:00FFFFH   000898H   CONST
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\51test (ADC)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   00002BH   000024H   BYTE   UNIT     DATA           _DATA_GROUP_
+00002CH   000030H   000005H   BYTE   UNIT     DATA           ?DT?MAIN
+000031H   000031H   000001H   BYTE   UNIT     IDATA          ?STACK
+LX51 LINKER/LOCATER V4.66.87.0                                                        03/15/2023  20:39:00  PAGE 2
+
+
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   000005H   000003H   BYTE   OFFS..   CODE           ?MAIN?00003
+000006H   000025H   000020H   BYTE   UNIT     CODE           ?PR?OLED_CLEAR?OLED
+000026H   000029H   000004H   BYTE   UNIT     CODE           ?PR?ADC_INT?ADC
+00002AH   00002AH   000001H   ---    ---      **GAP**
+00002BH   00002DH   000003H   BYTE   OFFS..   CODE           ?ADC?0002B
+00002EH   000159H   00012CH   BYTE   UNIT     CODE           ?PR?_OLED_NUMF?OLED
+00015AH   00025DH   000104H   BYTE   UNIT     CODE           ?PR?ANGLEFILT?MAIN
+00025EH   00033DH   0000E0H   BYTE   UNIT     CODE           ?PR?OLED_INIT?OLED
+00033EH   0003FBH   0000BEH   BYTE   UNIT     CODE           ?PR?_OLED_SHOWCHAR?OLED
+0003FCH   000458H   00005DH   BYTE   UNIT     CODE           ?PR?_GET_ADC10BITRESULT?ADC
+000459H   0004B4H   00005CH   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+0004B5H   000507H   000053H   BYTE   UNIT     CODE           ?PR?_ADC_INILIZE?ADC
+000508H   000533H   00002CH   BYTE   UNIT     CODE           ?PR?_OLED_WR_BYTE?OLED
+000534H   00055FH   00002CH   BYTE   UNIT     CODE           ?PR?_OLED_SET_POS?OLED
+000560H   000585H   000026H   BYTE   UNIT     CODE           ?PR?_WRITE_IIC_BYTE?OLED
+000586H   0005A3H   00001EH   BYTE   UNIT     CODE           ?PR?_DELAY_50MS?OLED
+0005A4H   0005C0H   00001DH   BYTE   UNIT     CODE           ?PR?ADC_CONFIG?MAIN
+0005C1H   0005DCH   00001CH   BYTE   UNIT     CODE           ?PR?_OLED_POW?OLED
+0005DDH   0005F2H   000016H   BYTE   UNIT     CODE           ?PR?_DELAY_1MS?OLED
+0005F3H   000602H   000010H   BYTE   UNIT     CODE           ?PR?IIC_WAIT_ACK?OLED
+000603H   000610H   00000EH   BYTE   UNIT     CODE           ?PR?_WRITE_IIC_COMMAND?OLED
+000611H   00061EH   00000EH   BYTE   UNIT     CODE           ?PR?_WRITE_IIC_DATA?OLED
+00061FH   000629H   00000BH   BYTE   UNIT     CODE           ?PR?_ADC_POWERCONTROL?ADC
+00062AH   000632H   000009H   BYTE   UNIT     CODE           ?PR?DLY10MS?MAIN
+000633H   00063BH   000009H   BYTE   UNIT     CODE           ?PR?IIC_START?OLED
+00063CH   000642H   000007H   BYTE   UNIT     CODE           ?PR?IIC_STOP?OLED
+000643H   0007FFH   0001BDH   ---    ---      **GAP**
+000800H   000C17H   000418H   BYTE   UNIT     CODE           ?C?LIB_CODE
+000C18H   001228H   000611H   ---    ---      **GAP**
+001229H   001234H   00000CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+001235H   00125CH   000028H   ---    ---      **GAP**
+00125DH   001AF4H   000898H   BYTE   UNIT     CONST          ?CO?OLED
+
+* * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
+   *DEL*:           00000EH   BYTE   UNIT     CODE           ?PR?BITTIME?SOFT_UART
+   *DEL*:           00002AH   BYTE   UNIT     CODE           ?PR?_TXSEND?SOFT_UART
+   *DEL*:           000010H   BYTE   UNIT     CODE           ?PR?_PRINTSTRING?SOFT_UART
+   *DEL*:           000023H   BYTE   UNIT     CODE           ?PR?_FILL_PICTURE?OLED
+   *DEL*:           000002H   BYTE   UNIT     DATA           ?DT?_FILL_PICTURE?OLED
+   *DEL*:           000017H   BYTE   UNIT     CODE           ?PR?OLED_DISPLAY_ON?OLED
+   *DEL*:           000011H   BYTE   UNIT     CODE           ?PR?OLED_DISPLAY_OFF?OLED
+   *DEL*:           000021H   BYTE   UNIT     CODE           ?PR?OLED_ON?OLED
+   *DEL*:           000001H   BYTE   UNIT     DATA           ?DT?OLED_ON?OLED
+   *DEL*:           000040H   BYTE   UNIT     CODE           ?PR?_OLED_SHOWSTRING?OLED
+   *DEL*:           000007H   BYTE   UNIT     DATA           ?DT?_OLED_SHOWSTRING?OLED
+   *DEL*:           000076H   BYTE   UNIT     CODE           ?PR?_OLED_NUM?OLED
+   *DEL*:           000009H   BYTE   UNIT     DATA           ?DT?_OLED_NUM?OLED
+   *DEL*:           000070H   BYTE   UNIT     CODE           ?PR?_OLED_SHOWCHINESE?OLED
+   *DEL*:           000004H   BYTE   UNIT     DATA           ?DT?_OLED_SHOWCHINESE?OLED
+   *DEL*:           000069H   BYTE   UNIT     CODE           ?PR?_OLED_DRAWBMP?OLED
+   *DEL*:           00000BH   BYTE   UNIT     DATA           ?DT?_OLED_DRAWBMP?OLED
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Target 1\51test (ADC)
+
+
+FUNCTION/MODULE               BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE   START  STOP  START  STOP
+=====================================================
+ADC_INT/ADC                  ----- -----  ----- -----
+
+LX51 LINKER/LOCATER V4.66.87.0                                                        03/15/2023  20:39:00  PAGE 3
+
+
+*** NEW ROOT ***************
+
+?C_C51STARTUP                ----- -----  ----- -----
+  +--> MAIN/MAIN
+
+MAIN/MAIN                    ----- -----  ----- -----
+  +--> ADC_CONFIG/MAIN
+  +--> OLED_INIT/OLED
+  +--> _DELAY_1MS/OLED
+  +--> OLED_CLEAR/OLED
+  +--> ANGLEFILT/MAIN
+  +--> _OLED_NUMF/OLED
+  +--> _DELAY_50MS/OLED
+
+ADC_CONFIG/MAIN              ----- -----  0008H 000DH
+  +--> _ADC_INILIZE/ADC
+  +--> _ADC_POWERCONTROL/ADC
+
+_ADC_INILIZE/ADC             ----- -----  ----- -----
+
+_ADC_POWERCONTROL/ADC        ----- -----  ----- -----
+
+OLED_INIT/OLED               ----- -----  ----- -----
+  +--> _OLED_WR_BYTE/OLED
+
+_OLED_WR_BYTE/OLED           ----- -----  ----- -----
+  +--> _WRITE_IIC_DATA/OLED
+  +--> _WRITE_IIC_COMMAND/OLED
+
+_WRITE_IIC_DATA/OLED         ----- -----  ----- -----
+  +--> _WRITE_IIC_BYTE/OLED
+  +--> IIC_WAIT_ACK/OLED
+  +--> IIC_STOP/OLED
+
+_WRITE_IIC_BYTE/OLED         ----- -----  ----- -----
+  +--> IIC_START/OLED
+
+IIC_START/OLED               ----- -----  ----- -----
+
+IIC_WAIT_ACK/OLED            ----- -----  ----- -----
+  +--> _WRITE_IIC_BYTE/OLED
+
+IIC_STOP/OLED                ----- -----  ----- -----
+
+_WRITE_IIC_COMMAND/OLED      ----- -----  ----- -----
+  +--> _WRITE_IIC_BYTE/OLED
+  +--> IIC_WAIT_ACK/OLED
+  +--> IIC_STOP/OLED
+
+_DELAY_1MS/OLED              ----- -----  ----- -----
+
+OLED_CLEAR/OLED              ----- -----  0008H 0008H
+  +--> _OLED_WR_BYTE/OLED
+
+ANGLEFILT/MAIN               ----- -----  0008H 002BH
+  +--> _GET_ADC10BITRESULT/ADC
+  +--> _DELAY_1MS/OLED
+
+_GET_ADC10BITRESULT/ADC      ----- -----  ----- -----
+
+_OLED_NUMF/OLED              ----- -----  0008H 0016H
+  +--> _OLED_POW/OLED
+  +--> _OLED_SHOWCHAR/OLED
+
+_OLED_POW/OLED               ----- -----  0017H 0017H
+LX51 LINKER/LOCATER V4.66.87.0                                                        03/15/2023  20:39:00  PAGE 4
+
+
+
+_OLED_SHOWCHAR/OLED          ----- -----  0017H 001BH
+  +--> _OLED_SET_POS/OLED
+  +--> _OLED_WR_BYTE/OLED
+
+_OLED_SET_POS/OLED           ----- -----  ----- -----
+  +--> _OLED_WR_BYTE/OLED
+
+_DELAY_50MS/OLED             ----- -----  ----- -----
+
+*** NEW ROOT ***************
+
+DLY10MS/MAIN                 ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\51test (ADC)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+*DEL*:00000000H   DATA     BYTE      ?_OLED_DrawBMP?BYTE
+*DEL*:00000000H   DATA     BYTE      ?_OLED_num?BYTE
+      00000008H   DATA     BYTE      ?_OLED_numf?BYTE
+      00000017H   DATA     BYTE      ?_OLED_ShowChar?BYTE
+*DEL*:00000000H   DATA     BYTE      ?_OLED_ShowString?BYTE
+      01000ADCH   CODE     ---       ?C?CASTF
+      01000B76H   CODE     ---       ?C?CLDOPTR
+      01000B5DH   CODE     ---       ?C?CLDPTR
+      00000000H   NUMBER   ---       ?C?CODESEG
+      01000AA8H   CODE     ---       ?C?FCASTC
+      01000AA3H   CODE     ---       ?C?FCASTI
+      01000A9EH   CODE     ---       ?C?FCASTL
+      01000807H   CODE     ---       ?C?FPADD
+      01000A01H   CODE     ---       ?C?FPDIV
+      01000B13H   CODE     ---       ?C?FPGETOPN2
+      010008F8H   CODE     ---       ?C?FPMUL
+      01000B48H   CODE     ---       ?C?FPNANRESULT
+      01000B52H   CODE     ---       ?C?FPOVERFLOW
+      01000B2AH   CODE     ---       ?C?FPRESULT
+      01000B3EH   CODE     ---       ?C?FPRESULT2
+      01000803H   CODE     ---       ?C?FPSUB
+      01000B4FH   CODE     ---       ?C?FPUNDERFLOW
+      01000BA3H   CODE     ---       ?C?IMUL
+      01000C0AH   CODE     ---       ?C?LNEG
+      01000BB5H   CODE     ---       ?C?UIDIV
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      01000459H   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+      010004B5H   CODE     ---       _ADC_Inilize
+      0100061FH   CODE     ---       _ADC_PowerControl
+      010005DDH   CODE     ---       _Delay_1ms
+      01000586H   CODE     ---       _Delay_50ms
+*DEL*:00000000H   CODE     ---       _fill_picture
+      010003FCH   CODE     ---       _Get_ADC10bitResult
+*DEL*:00000000H   CODE     ---       _OLED_DrawBMP
+*DEL*:00000000H   CODE     ---       _OLED_num
+      0100002EH   CODE     ---       _OLED_numf
+      010005C5H   CODE     ---       _oled_pow
+      01000534H   CODE     ---       _OLED_Set_Pos
+      0100033EH   CODE     ---       _OLED_ShowChar
+*DEL*:00000000H   CODE     ---       _OLED_ShowCHinese
+*DEL*:00000000H   CODE     ---       _OLED_ShowString
+      01000523H   CODE     ---       _OLED_WR_Byte
+*DEL*:00000000H   CODE     ---       _PrintString
+LX51 LINKER/LOCATER V4.66.87.0                                                        03/15/2023  20:39:00  PAGE 5
+
+
+*DEL*:00000000H   CODE     ---       _TxSend
+      01000567H   CODE     ---       _Write_IIC_Byte
+      01000603H   CODE     ---       _Write_IIC_Command
+      01000611H   CODE     ---       _Write_IIC_Data
+      010005A4H   CODE     ---       ADC_config
+      01000026H   CODE     ---       ADC_int
+      0000002CH   DATA     FLOAT     ang
+      0100015AH   CODE     ---       Anglefilt
+*DEL*:00000000H   CODE     ---       BitTime
+      0100062AH   CODE     ---       dly10ms
+      0100125DH   CONST    ---       F6x8
+      01001485H   CONST    ---       F8X16
+      01001A75H   CONST    ---       Hzk
+      01000633H   CODE     ---       IIC_Start
+      0100063CH   CODE     ---       IIC_Stop
+      010005FEH   CODE     ---       IIC_Wait_Ack
+      01000459H   CODE     ---       main
+      00000030H   DATA     BYTE      num
+      01000006H   CODE     ---       OLED_Clear
+*DEL*:00000000H   CODE     ---       OLED_Display_Off
+*DEL*:00000000H   CODE     ---       OLED_Display_On
+      0100025EH   CODE     ---       OLED_Init
+*DEL*:00000000H   CODE     ---       OLED_On
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\51test (ADC)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       ADC
+      01000026H   PUBLIC    CODE     ---       ADC_int
+      010003FCH   PUBLIC    CODE     ---       _Get_ADC10bitResult
+      0100061FH   PUBLIC    CODE     ---       _ADC_PowerControl
+      010004B5H   PUBLIC    CODE     ---       _ADC_Inilize
+
+      010004B5H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100061FH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010003FCH   BLOCK     CODE     ---       LVL=0
+      010003FCH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000004H   SYMBOL    DATA     VOID      adc
+      00000003H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000026H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       SOFT_UART
+      00000006H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      i
+
+      ---         MODULE    ---      ---       MAIN
+      00000030H   PUBLIC    DATA     BYTE      num
+      0000002CH   PUBLIC    DATA     FLOAT     ang
+      010005A4H   PUBLIC    CODE     ---       ADC_config
+      0100062AH   PUBLIC    CODE     ---       dly10ms
+      0100015AH   PUBLIC    CODE     ---       Anglefilt
+LX51 LINKER/LOCATER V4.66.87.0                                                        03/15/2023  20:39:00  PAGE 6
+
+
+      01000459H   PUBLIC    CODE     ---       main
+
+      01000459H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100015AH   BLOCK     CODE     ---       LVL=0
+      0100015AH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000004H   SYMBOL    DATA     VOID      t
+      00000008H   SYMBOL    DATA     VOID      i
+      00000007H   SYMBOL    DATA     VOID      j
+      00000009H   SYMBOL    DATA     VOID      temp
+      0000000BH   SYMBOL    DATA     VOID      sum
+      0000000DH   SYMBOL    DATA     VOID      filtime
+      0000000EH   SYMBOL    DATA     VOID      buf
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100062AH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010005A4H   BLOCK     CODE     ---       LVL=0
+      010005A4H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000008H   SYMBOL    DATA     VOID      ADC_InitStructure
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       OLED
+      01001A75H   PUBLIC    CONST    ---       Hzk
+      01001485H   PUBLIC    CONST    ---       F8X16
+      0100125DH   PUBLIC    CONST    ---       F6x8
+      0100025EH   PUBLIC    CODE     ---       OLED_Init
+      00000008H   PUBLIC    DATA     BYTE      ?_OLED_numf?BYTE
+      0100002EH   PUBLIC    CODE     ---       _OLED_numf
+      010005C5H   PUBLIC    CODE     ---       _oled_pow
+      00000017H   PUBLIC    DATA     BYTE      ?_OLED_ShowChar?BYTE
+      0100033EH   PUBLIC    CODE     ---       _OLED_ShowChar
+      01000006H   PUBLIC    CODE     ---       OLED_Clear
+      01000534H   PUBLIC    CODE     ---       _OLED_Set_Pos
+      01000523H   PUBLIC    CODE     ---       _OLED_WR_Byte
+      01000611H   PUBLIC    CODE     ---       _Write_IIC_Data
+      01000603H   PUBLIC    CODE     ---       _Write_IIC_Command
+      01000567H   PUBLIC    CODE     ---       _Write_IIC_Byte
+      010005FEH   PUBLIC    CODE     ---       IIC_Wait_Ack
+      0100063CH   PUBLIC    CODE     ---       IIC_Stop
+      01000633H   PUBLIC    CODE     ---       IIC_Start
+      010005DDH   PUBLIC    CODE     ---       _Delay_1ms
+      01000586H   PUBLIC    CODE     ---       _Delay_50ms
+
+      01000586H   BLOCK     CODE     ---       LVL=0
+      01000586H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000004H   SYMBOL    DATA     VOID      m
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010005DDH   BLOCK     CODE     ---       LVL=0
+      010005DDH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000005H   SYMBOL    DATA     VOID      j
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000633H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100063CH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+LX51 LINKER/LOCATER V4.66.87.0                                                        03/15/2023  20:39:00  PAGE 7
+
+
+
+      010005F3H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010005FEH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000560H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000567H   BLOCK     CODE     ---       LVL=0
+      01000567H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      i
+      00000005H   SYMBOL    DATA     VOID      m
+      00000007H   SYMBOL    DATA     VOID      da
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000603H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000611H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000508H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000523H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+      00000001H   SYMBOL    DATA     VOID      m
+
+      01000534H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000006H   BLOCK     CODE     ---       LVL=0
+      01000006H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000001H   SYMBOL    DATA     VOID      i
+      00000008H   SYMBOL    DATA     VOID      n
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+      00000001H   SYMBOL    DATA     VOID      i
+
+      0100033EH   BLOCK     CODE     ---       LVL=0
+      01000342H   BLOCK     CODE     NEAR LAB  LVL=1
+      0000001BH   SYMBOL    DATA     VOID      c
+      00000001H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010005C1H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010005C5H   BLOCK     CODE     ---       LVL=0
+      010005C9H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      result
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100002EH   BLOCK     CODE     ---       LVL=0
+      01000032H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000010H   SYMBOL    DATA     VOID      num1
+      00000012H   SYMBOL    DATA     VOID      num2
+      00000014H   SYMBOL    DATA     VOID      t
+      00000015H   SYMBOL    DATA     VOID      temp
+      00000016H   SYMBOL    DATA     VOID      enshow
+LX51 LINKER/LOCATER V4.66.87.0                                                        03/15/2023  20:39:00  PAGE 8
+
+
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+      00000001H   SYMBOL    DATA     VOID      t
+
+      0100025EH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C?FPADD
+      01000807H   PUBLIC    CODE     ---       ?C?FPADD
+      01000803H   PUBLIC    CODE     ---       ?C?FPSUB
+
+      ---         MODULE    ---      ---       ?C?FPMUL
+      010008F8H   PUBLIC    CODE     ---       ?C?FPMUL
+
+      ---         MODULE    ---      ---       ?C?FPDIV
+      01000A01H   PUBLIC    CODE     ---       ?C?FPDIV
+
+      ---         MODULE    ---      ---       ?C?FCAST
+      01000AA8H   PUBLIC    CODE     ---       ?C?FCASTC
+      01000AA3H   PUBLIC    CODE     ---       ?C?FCASTI
+      01000A9EH   PUBLIC    CODE     ---       ?C?FCASTL
+
+      ---         MODULE    ---      ---       ?C?CASTF
+      01000ADCH   PUBLIC    CODE     ---       ?C?CASTF
+
+      ---         MODULE    ---      ---       ?C?FPGETOPN
+      01000B13H   PUBLIC    CODE     ---       ?C?FPGETOPN2
+      01000B48H   PUBLIC    CODE     ---       ?C?FPNANRESULT
+      01000B52H   PUBLIC    CODE     ---       ?C?FPOVERFLOW
+      01000B2AH   PUBLIC    CODE     ---       ?C?FPRESULT
+      01000B3EH   PUBLIC    CODE     ---       ?C?FPRESULT2
+      01000B4FH   PUBLIC    CODE     ---       ?C?FPUNDERFLOW
+
+      ---         MODULE    ---      ---       ?C?CLDPTR
+      01000B5DH   PUBLIC    CODE     ---       ?C?CLDPTR
+
+      ---         MODULE    ---      ---       ?C?CLDOPTR
+      01000B76H   PUBLIC    CODE     ---       ?C?CLDOPTR
+
+      ---         MODULE    ---      ---       ?C?IMUL
+      01000BA3H   PUBLIC    CODE     ---       ?C?IMUL
+
+      ---         MODULE    ---      ---       ?C?UIDIV
+      01000BB5H   PUBLIC    CODE     ---       ?C?UIDIV
+
+      ---         MODULE    ---      ---       ?C?LNEG
+      01000C0AH   PUBLIC    CODE     ---       ?C?LNEG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 1129H BYTE (214%) *
+******************************************************************************
+
+Program Size: data=50.0 xdata=0 const=2200 code=2662
+*** ERROR L257: UNKNOWN

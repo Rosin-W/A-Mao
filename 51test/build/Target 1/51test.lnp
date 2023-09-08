@@ -1,0 +1,2 @@
+".\build\Target 1\ADC.o",".\build\Target 1\STARTUP.o",".\build\Target 1\Soft_UART.o",".\build\Target 1\main.o",".\build\Target 1\oled.o" TO ".\build\Target 1\51test"
+PRINT(".\build\Target 1\51test.map") REMOVEUNUSED
