@@ -1,0 +1,75 @@
+C51 COMPILER V9.57.0.0   ANGELADC                                                          05/08/2023 16:37:17 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE ANGELADC
+OBJECT MODULE PLACED IN .\Objects\AngelADC.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE AngelADC.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(D:\Keil_v5\C51\Library)
+                    - DEBUG OBJECTEXTEND PRINT(.\Listings\AngelADC.lst) TABS(2) OBJECT(.\Objects\AngelADC.obj)
+
+line level    source
+
+   1          #include  "AngelADC.h"
+   2          
+   3          void  ADC_config(void)
+   4          {
+   5   1        ADC_InitTypeDef   ADC_InitStructure;        //结构定义
+   6   1        ADC_InitStructure.ADC_Px        = ADC_P1_All ;  //设置要做ADC的IO,  ADC_P10 ~ ADC_P17(或操作),ADC_P1_All
+   7   1        ADC_InitStructure.ADC_Speed     = ADC_360T;     //ADC速度     ADC_90T,ADC_180T,ADC_360T,ADC_540T
+   8   1        ADC_InitStructure.ADC_Power     = ENABLE;     //ADC功率允许/关闭  ENABLE,DISABLE
+   9   1        ADC_InitStructure.ADC_AdjResult = ADC_RES_H8L2;   //ADC结果调整,  ADC_RES_H2L8,ADC_RES_H8L2
+  10   1        ADC_InitStructure.ADC_Polity    = PolityHigh;   //优先级设置  PolityHigh,PolityLow
+  11   1        ADC_InitStructure.ADC_Interrupt = DISABLE;      //中断允许    ENABLE,DISABLE
+  12   1        ADC_Inilize(&ADC_InitStructure);          //初始化
+  13   1        ADC_PowerControl(ENABLE);             //单独的ADC电源操作函数, ENABLE或DISABLE
+  14   1      }
+  15          
+  16          unsigned char i = 0;
+  17          
+  18          void Angel_Init(void)
+  19          {
+  20   1        ADC_config();
+  21   1        for(i=0;i<8;i++)//角度传感器相关初值设定
+  22   1        {
+  23   2          ang_initial[i]=0;
+*** ERROR C202 IN LINE 23 OF AngelADC.c: 'ang_initial': undefined identifier
+  24   2          ang_adc[i] = (float)Get_ADC10bitResult(i)/2.86;
+  25   2          ang_kf[i] = ang_adc[i];
+  26   2          ang_p[i]=0.05;
+  27   2        }
+  28   1      }
+  29          
+  30          unsigned char F = 1;//状态转移矩阵
+  31          unsigned char F_ = 1;
+  32          unsigned char H = 1;//状态观测矩阵
+  33          float Q = 0.8;//测量噪声方差
+  34          unsigned int R = 0.2;//观测噪声方差
+  35          float X_,P_,K;
+  36          
+  37          void AngelRead(void)
+  38          {//角度传感器数值读取
+  39   1        for(i=0;i<8;i++)
+  40   1        {ang_adc[i] = (float)Get_ADC10bitResult(i)/2.86;}//角度数值ADC读取
+  41   1        ang_adc[1]=-ang_adc[1];//由于安装位置不同，个别传感器数值需要修正
+  42   1        ang_adc[2]=-ang_adc[2];
+  43   1        ang_adc[5]=-ang_adc[5];
+  44   1        ang_adc[6]=-ang_adc[6];
+  45   1      }
+  46          
+  47          void Angelfilt(void)
+  48          {//角度传感器数值卡尔曼滤波
+  49   1        AngelRead();
+  50   1        for(i=0;i<8;i++)
+  51   1        {
+  52   2          ang_adc[i]=ang_adc[i]-ang_initial[i];//去除初始值，以角度变化绝对值计算
+*** ERROR C202 IN LINE 52 OF AngelADC.c: 'ang_initial': undefined identifier
+C51 COMPILER V9.57.0.0   ANGELADC                                                          05/08/2023 16:37:17 PAGE 2   
+
+  53   2          X_ = F*ang_kf[i];//根据上一时刻预计当前观测值，不是准确值
+  54   2          P_ = F*ang_p[i]*F_+Q;//根据上一时刻协方差预测当前协方差
+  55   2          K = ang_p[i]*(H*ang_p[i]*H+R);//卡尔曼系数K，权衡预测P和观察R
+  56   2          ang_kf[i] = X_+K*(ang_adc[i]-H*X_);//实际观测值由预计观测值加上残差修正
+  57   2          ang_p[i] = (1-K*H)*P_;//更新最佳估计值的噪声分布，输出值用于下一次滤波
+  58   2        }
+  59   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)
